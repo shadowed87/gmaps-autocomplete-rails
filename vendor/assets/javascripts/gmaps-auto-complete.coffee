@@ -69,6 +69,8 @@ class GmapsCompleter
     @errorField = opts['#gmaps-error']
     @debugOn    = opts['debugOn']
 
+    @submitFormOnSelect = opts['submitFormOnSelect']
+
     @debug 'called with opts',  callOpts
     @debug 'final completerAssist', @completerAssist
     @debug 'defaultOptions',    @defaultOptions
@@ -287,6 +289,11 @@ class GmapsCompleterDefaultAssist
     @debug 'updateAdr', updateAdr
 
     $(inputField).val updateAdr
+
+    #submit rails form
+    if @submitFormOnSelect
+      $(@inputField).trigger('submit.rails')
+
     @positionOutputter latLng
 
   positionOutputter: (latLng) ->
